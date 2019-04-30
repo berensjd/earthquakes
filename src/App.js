@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, Fragment } from "react";
+import { Route, Redirect, Switch } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Earthquakes from "./components/earthquakes";
+
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faCaretUp, faCaretDown);
+class App extends Component {
+  state = {};
+
+  render() {
+    return (
+      <Fragment>
+        <ToastContainer />
+        <main className="container">
+          <Switch>
+            <Route path="/earthquakes" component={Earthquakes} />
+            <Redirect exact from="/" to="/earthquakes" />
+            <Redirect to="/not-found" />
+          </Switch>
+        </main>
+      </Fragment>
+    );
+  }
 }
 
 export default App;
