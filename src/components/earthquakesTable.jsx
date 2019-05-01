@@ -15,7 +15,15 @@ export default props => {
 
 function getColumns() {
   return [
-    { path: "place", label: "Location" },
+    {
+      path: "place",
+      label: "Location",
+      content: earthquake => (
+        <a href={earthquake.url} target="_blank" rel="noopener noreferrer">
+          {earthquake.place}
+        </a>
+      )
+    },
     { path: "timeFormatted", label: "Event Time" },
     { path: "mag", label: "Magitude" }
   ];

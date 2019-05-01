@@ -5,22 +5,27 @@ export default paging => {
   const {
     pagesize,
     currentpage,
-    extractedEarthquakeData: allData,
+    earthquakedata: allData,
     selectedMagitude,
+    selectedMagitudeType,
     searchQuery,
     sortcolumn
   } = paging;
   let filtered = allData;
-
-  if (searchQuery)
+  console.log({ searchQuery, selectedMagitude, selectedMagitudeType });
+  if (searchQuery && searchQuery.length >= 1)
     filtered = allData.filter(item =>
       item.place.toLowerCase().includes(searchQuery.toLocaleLowerCase())
     );
-  else if (selectedMagitude)
+  else if (selectedMagitude !== "")
     filtered = allData.filter(
       item => item.magSelectionHook === selectedMagitude
     );
+  else if (selectedMagitudeType !== "")
+    filtered = allData.filter(item => item.magType === selectedMagitudeType);
+
   const sorted = _.orderBy(filtered, [sortcolumn.path], [sortcolumn.order]);
   const pagedData = paginate(sorted, currentpage, pagesize);
-  return { filteredCount: filtered.length, pagedData };
+  const filteredCount = filtered ? filtered.length : 0;
+  return { filteredCount, pagedData };
 };
