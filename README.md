@@ -1,3 +1,5 @@
+### Summary
+
 This demo's the consumption of a public API service from USGS using react library.<br>
 I have made it a mission to also demo the implemenation of custom hooks and change "mindest" from<br>
 class-based components to the functional type.
@@ -18,7 +20,7 @@ column headings.
 The API service has limited the maximum number of returned earthquake events to 20,000 for any given period<br>
 If the maximum is exceeeded then an error message will appear on the screen.
 
-For small datasets the page size is 25 rows. The page size will dynamically increase fro larger datasets.
+For small datasets the page size is 25 rows. The page size will dynamically increase for larger datasets.
 
 ## Available Scripts
 
