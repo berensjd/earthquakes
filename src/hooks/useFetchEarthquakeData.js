@@ -16,6 +16,8 @@ export default function useFetchEarthquakeData([starttime, endtime]) {
 
   useEffect(() => {
     async function fetchData() {
+      setLoading(true);
+
       console.log(
         `Fetching earthquake data from server using query string: ${queryString}`
       );

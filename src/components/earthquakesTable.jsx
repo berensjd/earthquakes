@@ -25,6 +25,7 @@ function getColumns() {
       )
     },
     { path: "timeFormatted", label: "Event Time" },
-    { path: "mag", label: "Magitude" }
+    { path: "mag", label: "Magitude" },
+    { path: "magType", label: "MagType" }
   ];
 }

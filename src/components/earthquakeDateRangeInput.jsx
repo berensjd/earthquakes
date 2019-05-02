@@ -1,4 +1,7 @@
 import React, { Fragment } from "react";
+import DayPickerInput from "react-day-picker/DayPickerInput";
+import "react-day-picker/lib/style.css";
+import moment from "moment";
 
 export default ({
   fromDate,
@@ -9,30 +12,28 @@ export default ({
 }) => {
   return (
     <Fragment>
-      <h5>Please enter period from/to dates</h5>
+      <h5>
+        Please select period from/to dates then press Submit for a new selection
+      </h5>
       <form onSubmit={e => onSubmit(e)}>
         <div className="row">
           <div className="form-group col-3">
             <label htmlFor="fromDate">From Date</label>
-            <input
-              type="text"
-              name="fromDate"
-              className="form-control my-3"
-              placeholder="Format: YYYY-MM-DD"
-              value={fromDate}
-              onChange={e => onChangeFromDate(e.currentTarget.value)}
+            <DayPickerInput
+              placeholder={fromDate}
+              onDayChange={day =>
+                onChangeFromDate(moment(day).format("YYYY-MM-DD"))
+              }
             />
           </div>
 
           <div className="form-group col-3">
             <label htmlFor="toDate">To Date</label>
-            <input
-              type="text"
-              name="toDate"
-              className="form-control my-3"
-              placeholder="Format: YYYY-MM-DD"
-              value={toDate}
-              onChange={e => onChangeToDate(e.currentTarget.value)}
+            <DayPickerInput
+              placeholder={toDate}
+              onDayChange={day =>
+                onChangeToDate(moment(day).format("YYYY-MM-DD"))
+              }
             />
           </div>
         </div>

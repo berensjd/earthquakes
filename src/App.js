@@ -22,7 +22,7 @@ class App extends Component {
           <Switch>
             <Route path="/earthquakes" component={Earthquakes} />
             <Redirect exact from="/" to="/earthquakes" />
-            <Redirect to="/not-found" />
+            <Redirect to="/earthquakes" />
           </Switch>
         </main>
       </Fragment>

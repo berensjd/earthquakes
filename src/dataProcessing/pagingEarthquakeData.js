@@ -1,9 +1,9 @@
 import _ from "lodash";
 import { paginate } from "../utils/paginate";
+import dynamicPageSize from "../utils/dynamicPagesize";
 
 export default paging => {
   const {
-    pagesize,
     currentpage,
     earthquakedata: allData,
     selectedMagitude,
@@ -25,7 +25,8 @@ export default paging => {
     filtered = allData.filter(item => item.magType === selectedMagitudeType);
 
   const sorted = _.orderBy(filtered, [sortcolumn.path], [sortcolumn.order]);
-  const pagedData = paginate(sorted, currentpage, pagesize);
   const filteredCount = filtered ? filtered.length : 0;
-  return { filteredCount, pagedData };
+  const pagesize = dynamicPageSize(filteredCount);
+  const pagedData = paginate(sorted, currentpage, pagesize);
+  return { filteredCount, pagedData, pagesize };
 };

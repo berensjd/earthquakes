@@ -9,26 +9,28 @@ export default function usePaging([
   selectedMagitude,
   selectedMagitudeType
 ]) {
-  const pagesize = 500;
+  //const pagesize = 500;
   const [pagedEarthquakeData, setPagedEarthquakedata] = useState([]);
   const [filteredcount, setFilteredcount] = useState(0);
+  const [pagesize, setPagesize] = useState(0);
 
   useEffect(() => {
     console.log(currentpage, sortcolumn);
 
-    const { filteredCount, pagedData } = paging({
+    const { filteredCount, pagedData, pagesize } = paging({
       earthquakedata,
       selectedMagitude,
       selectedMagitudeType,
-      pagesize,
       currentpage,
       searchQuery,
       sortcolumn
     });
 
+    console.log(pagesize);
     setPagedEarthquakedata(pagedData);
 
     setFilteredcount(filteredCount);
+    setPagesize(pagesize);
   }, [
     earthquakedata,
     currentpage,
