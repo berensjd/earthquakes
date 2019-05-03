@@ -1,14 +1,14 @@
-### Summary
+## Summary
 
 This demo's the consumption of a public API service from USGS using react library.<br>
 I have made it a mission to also demo the implemenation of custom hooks and change "mindest" from<br>
 class-based components to the functional type.
 
-##Source API - Earthquake event information
+## Source API - Earthquake event information
 
 [https://earthquake.usgs.gov/fdsnws/event/1]
 
-##About the App
+## About the App
 
 Upon first page load, I have defaulted the event period dates from three days ago to today.<br>
 The from/to date range can be changed via the input controls and pressing the submit button.
@@ -37,3 +37,7 @@ You will also see any lint errors in the console.
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.<br>
+
+I have included both unit and integration tests<br>
+The integration test ( ./feeds/earthquakeQuery.test.js ) will attempt to check to see if the API is still<br>
+in the expected form and that the feeder modules are operational.
