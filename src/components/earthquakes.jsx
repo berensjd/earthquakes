@@ -97,12 +97,22 @@ export default props => {
     setCurrentpage(1);
     event.preventDefault();
   }
+
   /**Render Components */
-  return (
-    <Fragment>
-      <div>
-        <h3>{title}</h3>
-      </div>
+
+  function renderPagination() {
+    return (
+      <Pagination
+        itemsCount={filteredcount}
+        pageSize={pagesize}
+        currentPage={currentpage}
+        onPageChange={handlePageChange}
+      />
+    );
+  }
+
+  function renderEarthquakeDateRangeInput() {
+    return (
       <EarthquakeDateRangeInput
         fromDate={startTimeInput}
         toDate={endTimeInput}
@@ -110,6 +120,11 @@ export default props => {
         onChangeToDate={handleEndTime}
         onSubmit={handleSubmit}
       />
+    );
+  }
+
+  function renderEarthquakeTableFilter() {
+    return (
       <EarthquakeTableFilter
         selectedMagitude={selectedMagitude}
         onChangeMagitude={handleSelectMagitude}
@@ -120,43 +135,77 @@ export default props => {
         searchQuery={searchQuery}
         onChangeSearchQuery={handleSearch}
       />
+    );
+  }
+
+  function renderEarthquakesTable() {
+    return (
+      <EarthquakesTable
+        earthquakedata={pagedEarthquakeData}
+        sortColumn={sortcolumn}
+        onSort={handleSort}
+      />
+    );
+  }
+
+  function renderTotalEvents() {
+    return (
+      <p>
+        Total Events: {count} Filtered Events: {filteredcount}{" "}
+      </p>
+    );
+  }
+
+  function renderEventsNotFound() {
+    return (
       <div>
-        {loading ? (
-          <div>
-            {" "}
-            <h2>Loading</h2>
-          </div>
-        ) : filteredcount ? (
-          <Fragment>
-            <p>
-              Total Events: {count} Filtered Events: {filteredcount}{" "}
-            </p>
-            <Pagination
-              itemsCount={filteredcount}
-              pageSize={pagesize}
-              currentPage={currentpage}
-              onPageChange={handlePageChange}
-            />
-
-            <EarthquakesTable
-              earthquakedata={pagedEarthquakeData}
-              sortColumn={sortcolumn}
-              onSort={handleSort}
-            />
-
-            <Pagination
-              itemsCount={filteredcount}
-              pageSize={pagesize}
-              currentPage={currentpage}
-              onPageChange={handlePageChange}
-            />
-          </Fragment>
-        ) : (
-          <div>
-            <h2>Nothing to display</h2>
-          </div>
-        )}
+        <h2>Nothing to display</h2>
       </div>
+    );
+  }
+
+  function renderPageLoading() {
+    return (
+      <div>
+        <h2>Loading</h2>
+      </div>
+    );
+  }
+
+  function renderPageTitle() {
+    return (
+      <div>
+        <h3>{title}</h3>
+      </div>
+    );
+  }
+
+  function renderConditionalLoading() {
+    return (
+      <div>{loading ? renderPageLoading() : renderConditionalTable()}</div>
+    );
+  }
+
+  function renderConditionalTable() {
+    return filteredcount ? (
+      <Fragment>
+        {renderTotalEvents()}
+        {renderPagination()}
+        {renderEarthquakesTable()}
+        {renderPagination()}
+      </Fragment>
+    ) : (
+      renderEventsNotFound()
+    );
+  }
+
+  /**Final Render */
+  return (
+    <Fragment>
+      {renderPageTitle()}
+      {renderEarthquakeDateRangeInput()}
+      {renderEarthquakeTableFilter()}
+      {renderConditionalLoading()}
     </Fragment>
   );
 };
